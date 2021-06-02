@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.foodorder.adapters.RestaurantListAdapter;
 import com.example.foodorder.model.RestaurantModel;
 import com.google.gson.Gson;
 
@@ -19,7 +21,7 @@ import java.io.Writer;
 import java.util.Arrays;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements RestaurantListAdapter.RestaurantListClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,14 +31,14 @@ public class MainActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Restaurant List");
         List <RestaurantModel> restaurantModelList = getRestaurantData();
-        initRecyclerView();
+        initRecyclerView(restaurantModelList);
     }
 
-    private void initRecyclerView(){
+    private void initRecyclerView(List <RestaurantModel> restaurantModelList){
         RecyclerView rv = findViewById(R.id.recyclerView);
         rv.setLayoutManager(new LinearLayoutManager(this));
-
-        rv.setAdapter();
+        RestaurantListAdapter adapter = new RestaurantListAdapter(restaurantModelList, this);
+        rv.setAdapter(adapter);
 
     }
 
@@ -61,5 +63,10 @@ public class MainActivity extends AppCompatActivity {
         List<RestaurantModel> restList = Arrays.asList(restaurantModels);
 
         return restList;
+    }
+
+    @Override
+    public void onItemClick(RestaurantModel restaurantModel) {
+
     }
 }

@@ -92,5 +92,6 @@ public class Hours {
             case "Saturday":
                 return this.Saturday;
         }
+        return day;
     }
 }
