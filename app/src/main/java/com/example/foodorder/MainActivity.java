@@ -67,6 +67,8 @@ public class MainActivity extends AppCompatActivity implements RestaurantListAda
 
     @Override
     public void onItemClick(RestaurantModel restaurantModel) {
-
+        Intent intent = new Intent(MainActivity.this, RestaurantMenuActivity.class);
+        intent.putExtra("RestaurantModel", restaurantModel);
+        startActivity(intent);
     }
 }
